@@ -1,5 +1,6 @@
 <?php 
 include_once($_SERVER['DOCUMENT_ROOT']."/cartridjes/class/users.php"); 
+include_once($_SERVER['DOCUMENT_ROOT']."/cartridjes/class/cartridjes.php"); 
 $users = new Users();
 $users->checkSigninUser();
 if($_GET['logout'] == TRUE) {
@@ -16,7 +17,7 @@ if($_GET['logout'] == TRUE) {
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
 
-    <title>Учет картриджей</title>
+    <title>Учет картриджей - Управление каритриджами</title>
 
     <!-- Bootstrap core CSS -->
     <link href="http://localhost/cartridjes/lib/css/bootstrap.min.css" rel="stylesheet">
@@ -45,7 +46,7 @@ if($_GET['logout'] == TRUE) {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Учет картриджей</a>
+          <a class="navbar-brand" href="http://localhost/cartridjes/dashboard">Учет картриджей</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -68,12 +69,24 @@ if($_GET['logout'] == TRUE) {
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Принтеры</h1>
+          <h1 class="page-header">Картриджи</h1>
+          <form class="form-signin" role="form" method="post">
+            <input type="submit" name="add" class="btn btn-success glyphicon glyphicon-plus" value="Добавить">
+            <input type="submit" name="edit" class="btn btn-warning glyphicon glyphicon-pencil" value="Редактировать">
+            <input type="submit" name="delete" class="btn btn-danger glyphicon glyphicon-remove" value="Удалить">
+          </form>
           <div class="table-responsive">
-            <button type="button" class="btn btn-success">Добавить картридж</button>
-            <button type="button" class="btn btn-info">Отправить картридж</button>
-            <button type="button" class="btn btn-warning">Редактировать картридж</button>
-            <button type="button" class="btn btn-danger">Удалить картридж</button>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Картридж</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php new cartridjes(); ?>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

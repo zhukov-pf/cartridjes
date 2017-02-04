@@ -47,12 +47,12 @@ if($_GET['logout'] == TRUE) {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Учет картриджей</a>
+          <a class="navbar-brand" href="http://localhost/cartridjes/dashboard">Учет картриджей</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Добро пожаловать <?php echo $_SESSION['f_name'];?></a></li>
-            <li><a href="../dashboard">Обзор</a></li>
+            <li><a href="#">Добро пожаловать <?php echo $_SESSION['l_name']." ".$_SESSION['f_name'];?></a></li>
+            <li><a href="http://localhost/cartridjes/dashboard">Обзор</a></li>
             <li><a href="?logout=TRUE">Выход</a></li>
           </ul>
         </div>
@@ -64,9 +64,10 @@ if($_GET['logout'] == TRUE) {
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <li class="active"><a href="#">Обзор</a></li>
-            <li><a href="../dashboard/printers">Принтеры</a></li>
-            <li><a href="../dashboard/cartridjes">Картриджи</a></li>
-            <li><a href="#">Пользователи</a></li>
+            <li><a href="http://localhost/cartridjes/dashboard/printers">Принтеры</a></li>
+            <li><a href="http://localhost/cartridjes/dashboard/cartridjes">Картриджи</a></li>
+            <li><a href="http://localhost/cartridjes/dashboard/points">Филиалы</a></li>
+            <li><a href="http://localhost/cartridjes/dashboard/users">Пользователи</a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -99,6 +100,23 @@ if($_GET['logout'] == TRUE) {
               </thead>
               <tbody>
                   <?php new stockView();?>
+              </tbody>
+            </table>
+          </div>
+          <h2 class="sub-header">История</h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Отправитель</th>
+                  <th>Картридж</th>
+                  <th>Куда</th>
+                  <th>Дата</th>
+                </tr>
+              </thead>
+              <tbody>
+                  
               </tbody>
             </table>
           </div>

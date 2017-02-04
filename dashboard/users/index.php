@@ -16,7 +16,7 @@ if($_GET['logout'] == TRUE) {
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
 
-    <title>Учет картриджей</title>
+    <title>Учет картриджей - Управление пользователями</title>
 
     <!-- Bootstrap core CSS -->
     <link href="http://localhost/cartridjes/lib/css/bootstrap.min.css" rel="stylesheet">
@@ -45,12 +45,12 @@ if($_GET['logout'] == TRUE) {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Учет картриджей</a>
+          <a class="navbar-brand" href="http://localhost/cartridjes/dashboard">Учет картриджей</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#">Добро пожаловать <?php echo $_SESSION['f_name'];?></a></li>
-            <li><a href="../dashboard">Обзор</a></li>
+            <li><a href="http://localhost/cartridjes/dashboard">Обзор</a></li>
             <li><a href="?logout=TRUE">Выход</a></li>
           </ul>
         </div>
@@ -61,14 +61,14 @@ if($_GET['logout'] == TRUE) {
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li><a href="cartridjes/dashboard">Обзор</a></li>
-            <li class="active"><a href="#">Принтеры</a></li>
-            <li><a href="#">Картриджи</a></li>
-            <li><a href="#">Пользователи</a></li>
+            <li><a href="http://localhost/cartridjes/dashboard">Обзор</a></li>
+            <li><a href="http://localhost/cartridjes/dashboard/printers">Принтеры</a></li>
+            <li><a href="http://localhost/cartridjes/dashboard/cartridjes">Картриджи</a></li>
+            <li class="active"><a href="http://localhost/cartridjes/dashboard/users">Пользователи</a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Принтеры</h1>
+          <h1 class="page-header">Пользователи</h1>
           <div class="table-responsive">
             <button type="button" class="btn btn-success">Добавить принтер</button>
             <button type="button" class="btn btn-warning">Редактировать принтер</button>
