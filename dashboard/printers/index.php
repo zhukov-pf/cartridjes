@@ -1,9 +1,18 @@
 <?php 
-include_once($_SERVER['DOCUMENT_ROOT']."/cartridjes/class/users.php"); 
+include_once($_SERVER['DOCUMENT_ROOT']."/cartridjes/class/users.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/cartridjes/class/printer_view.php"); 
+include_once($_SERVER['DOCUMENT_ROOT']."/cartridjes/class/printersFunction.php"); 
 $users = new Users();
 $users->checkSigninUser();
+$printer = new printersFunction();
 if($_GET['logout'] == TRUE) {
   $users->flushUsersSession();
+}
+if(isset($_POST['addPrinter'])) {
+  $printer->addPrinter();
+}
+if(isset($_POST['deletePrinter'])) {
+  $printer->deletePrinter();
 }
 ?>
 <!DOCTYPE html>
@@ -49,7 +58,7 @@ if($_GET['logout'] == TRUE) {
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Добро пожаловать <?php echo $_SESSION['f_name'];?></a></li>
+            <li><a href="#">Добро пожаловать <?php echo $_SESSION['l_name']." ".$_SESSION['f_name'];?></a></li>
             <li><a href="http://localhost/cartridjes/dashboard">Обзор</a></li>
             <li><a href="?logout=TRUE">Выход</a></li>
           </ul>
@@ -70,35 +79,77 @@ if($_GET['logout'] == TRUE) {
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Принтеры</h1>
           <div class="table-responsive">
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addPrinter">Добавить принтер</button>
-            <button type="button" class="btn btn-warning">Редактировать принтер</button>
-            <button type="button" class="btn btn-danger">Удалить принтер</button>
-
-            <div class="modal fade" id="addPrinter" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Новый принтер</h4>
-                  </div>
-                  <div class="modal-body">
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Принтер</th>
+                    <th>Картридж</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php new printerView(); ?>
+                </tbody>
+              </table>
+            </div>
+            <hr>
+            <div class="panel-group" id="accordion">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Добавить принтер</a>
+                  </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in">
+                  <div class="panel-body">
                     <form role="form" method="post">
                       <div class="form-group">
                         <label for="printerModel">Модель принтера</label>
-                        <input type="text" class="form-control" id="printerModel" placeholder="HP LaserJet Pro P1102">
+                        <input type="text" class="form-control" id="printerModel" name="printerModel" placeholder="HP LaserJet Pro P1102">
                       </div>
                       <div class="form-group">
                         <label for="printerModel">Модель картриджа</label>
-                        <select class="form-control">
-                          <option>1</option>
-                          <option>2</option>
+                        <select class="form-control" name="modelCartridje">
+                          <?php $printer->selectCartridjes(); ?>
                         </select>
                       </div>
-                      <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+                      <button type="submit" name="addPrinter" class="btn btn-success">Добавить</button>
+                      <button type="reset" class="btn btn-danger" data-dismiss="modal">Отмена</button>
                     </form>
                   </div>
                 </div>
               </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Удалить принтер</a>
+                  </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>#</th>
+                    <th>Принтер</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <form role="form" method="post">
+                    <?php $printer->viewPrintersList();?>
+                    <button type="submit" name="deletePrinter" class="btn btn-success">Удалить</button>
+                    <button type="reset" class="btn btn-danger" data-dismiss="modal">Отмена</button>
+                  </form>
+                </tbody>
+              </table>
+            </div>
+                </div>
+              </div>
+            </div>
+
             </div>
           </div>
         </div>
